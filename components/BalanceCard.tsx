@@ -3,9 +3,10 @@ import { useAddress, useContract, useContractEvents, useContractMetadata, useTok
 
 type Props = {
     tokenAddress: string;
+    add: string;
 };
 
-export default function BalanceCard({ tokenAddress }: Props) {
+export default function BalanceCard({ tokenAddress, add }: Props) {
     const address = useAddress();
 
     const {
@@ -20,7 +21,7 @@ export default function BalanceCard({ tokenAddress }: Props) {
     const {
         data: tokenBalance,
         isLoading: isTokenBalanceLoading,
-    } = useTokenBalance(contract, address);
+    } = useTokenBalance(contract, add);
 
     const {
         data: events,

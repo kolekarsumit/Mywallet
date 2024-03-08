@@ -1,10 +1,13 @@
 
-import {Card, Flex, Heading, Spinner, Stack, Text } from '@chakra-ui/react'
+import {Button, Card, Center, Flex, Heading, Spinner, Stack, Text } from '@chakra-ui/react'
 import Records from '../components/user.json'
 import { ConnectWallet, useAddress, useContract, useContractMetadata, useContractRead, useTokenBalance } from "@thirdweb-dev/react";
 import TokenBlance from '../components/TokenBalance';
 import { TRANSFER_CONTRACT_ADDRESS } from '../const/addresses';
 import BalanceCard from '../components/BalanceCard';
+import Request from './RequestMoney';
+import Link from 'next/link';
+import { useState } from 'react';
 
 
 type Props = {
@@ -22,7 +25,6 @@ export default function UserInformation(){
       data: tokenBalance,
       isLoading: isTokenBalanceLoading,
   } = useTokenBalance(contract, address);
-
   
 
     return (
@@ -39,31 +41,58 @@ export default function UserInformation(){
                 boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
                 backgroundColor: '#fff',
                 cursor: 'pointer', 
-                height:'180px',
+                height:'650px',
                 width:'800px',
               };
-      
-              const handleClick = () => {
-                window.location.href = `/address/${record.address}`;
-              };
 
-             
-      
+              const [data,setData ]= useState({
+                id:"1",
+              });
+
+              const { 
+                contract: transferContract,
+            } = useContract(TRANSFER_CONTRACT_ADDRESS);
+        
+            const {
+                data: verifiedTokens,
+                isLoading: isVerifiedTokensLoading,
+            } = useContractRead(
+                transferContract,
+                "getVerifiedTokens"
+            );
+              
               return (
-                <Card px={8} py={10} style={cardStyle} key={record.id} onClick={handleClick}>
+                <Card px={8} py={10} style={cardStyle} key={record.id}>
                   <Stack spacing={8}>
                     <Flex flexDirection={"row"} alignItems={"center"}>
                       <Text fontSize={"lg"} mr={4}>{record.address}</Text>
                       <Text fontSize={"lg"} ml={12}>{record.intrest}</Text>
                     </Flex>
                     <Text fontSize={"bold"} >Balance:</Text>
-                    {!isTokenBalanceLoading ? (
-                        <Text fontSize={"3xl"} fontWeight={"bold"}>{tokenBalance?.displayValue}</Text>
-                    ) : (
-                        <Spinner />
-                    )}
+                    {!isVerifiedTokensLoading ? (
+                            verifiedTokens.map((token: string) => (
+                                <BalanceCard
+                                    key={token}
+                                    tokenAddress={token}
+                                    add={record.address}
+                                />
+                            ))
+                        ) : (
+                            <Spinner />
+                        )}
+                        <Link href={{pathname: "/RequestMoney",query:{
+                          add:record.address,
+                          bal:" ",
+                          inr:" "
+                        },}} >
+                          Get Loan
+                        </Link>
                   </Stack>
+       
+
+       
                 </Card>
+                
               );
             })}
         </div>

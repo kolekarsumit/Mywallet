@@ -4,13 +4,13 @@ import { TRANSFER_CONTRACT_ADDRESS } from "../../const/addresses";
 import BalanceCard from "../../components/BalanceCard";
 
 export default function AccountPage() {
-    const address = useAddress();
-    
+    const address = useAddress()?.toString();
+
     function truncateAddress(address: string) {
         return `${address.substring(0, 6)}...${address.substring(address.length - 4)}`;
     };
 
-    const { 
+    const {
         contract: transferContract,
     } = useContract(TRANSFER_CONTRACT_ADDRESS);
 
@@ -21,33 +21,34 @@ export default function AccountPage() {
         transferContract,
         "getVerifiedTokens"
     );
-    
+
     return (
         <Container maxW={"1440px"} py={4}>
             {address ? (
                 <Flex>
                     <Flex flexDirection={"column"} mr={8} p={10}>
-                        <Avatar size={"2xl"} mb={4}/>
-                        <Text 
-                            fontSize={"sm"} 
-                            border={"1px solid black"} 
-                            textAlign={"center"} 
+                        <Avatar size={"2xl"} mb={4} />
+                        <Text
+                            fontSize={"sm"}
+                            border={"1px solid black"}
+                            textAlign={"center"}
                             borderRadius={4}
                         >{truncateAddress(address)}</Text>
                     </Flex>
                     <Flex flexDirection={"column"} w={"100%"}>
                         <Heading>Token Balances</Heading>
                         <SimpleGrid columns={3} spacing={4} mt={4}>
-                        {!isVerifiedTokensLoading ? (
-                            verifiedTokens.map((token: string) => (
-                                <BalanceCard
-                                    key={token}
-                                    tokenAddress={token}
-                                />
-                            ))
-                        ) : (
-                            <Spinner />
-                        )}
+                            {!isVerifiedTokensLoading ? (
+                                verifiedTokens.map((token: string) => (
+                                    <BalanceCard
+                                        key={token}
+                                        tokenAddress={token}
+                                        add={address}
+                                    />
+                                ))
+                            ) : (
+                                <Spinner />
+                            )}
                         </SimpleGrid>
                     </Flex>
                 </Flex>
@@ -56,7 +57,7 @@ export default function AccountPage() {
                     <Text>Connect Wallet</Text>
                 </Flex>
             )}
-            
+
         </Container>
     )
 }
