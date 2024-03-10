@@ -42,28 +42,33 @@ export default function TransferCard(){
 
     return(
 <Card w={"50%"} p={20}>
-<Heading>Transfer</Heading>
+<Heading textAlign={"center"} mb={10}>Transfer Money</Heading>
 
-<Text mt={4}>Select Token:</Text>
+<Text fontWeight={"bold"} mt={4} mb={5}>Select Currency:</Text>
 
-<Flex flexDirection={"row"} mt={4}>
-{!isVerifiedTokensLoading && 
-verifiedTokens.map((tokenAddress: string)=>(
-    <Box
-    key={tokenAddress}
-    onClick={()=>handleTokenSelection(tokenAddress)}>
+<Flex
+  style={{
+    display: "flex",
+    flexDirection: "row",
+    marginTop: "5px", 
+    maxWidth:"25%",
+    padding:"10px"
 
-        <TokenSelection 
-        tokenAddress={tokenAddress}
-        isSelected={selectedToken===tokenAddress}
+  }}
+>
+  {!isVerifiedTokensLoading &&
+    verifiedTokens.map((tokenAddress: string) => (
+      <Box key={tokenAddress} onClick={() => handleTokenSelection(tokenAddress)}>
+        <TokenSelection
+          tokenAddress={tokenAddress}
+          isSelected={selectedToken === tokenAddress}
         />
-
-    </Box>
-))}
+      </Box>
+    ))}
 </Flex>
 <TokenBlance tokenAddress={selectedToken} />
 
-<Text mt={4} fontWeight={"bold"}>Send To:</Text>
+<Text mt={4} mb={2} fontWeight={"bold"}>Send To:</Text>
             <Input
                 placeholder="0x0000000"
                 type="text"
@@ -71,16 +76,16 @@ verifiedTokens.map((tokenAddress: string)=>(
                 onChange={(event) => handleChange(event, "reciver")}
             />
 
-<Text mt={4} fontWeight={"bold"}>Amount:</Text>
+<Text mt={4} mb={2} fontWeight={"bold"}>Amount:</Text>
             <Input
                 placeholder="0.0"
                 type="number"
                 value={formData.amount}
                 onChange={(event) => handleChange(event, "amount")}
             />
-             <Text mt={4} fontWeight={"bold"}>Message:</Text>
+            <Text mt={4} mb={2} fontWeight={"bold"}>Note:</Text>
             <Input
-                placeholder="Add short message here."
+                placeholder="Add a note here."
                 type="text"
                 value={formData.message}
                 onChange={(event) => handleChange(event, "message")}
@@ -88,7 +93,7 @@ verifiedTokens.map((tokenAddress: string)=>(
 
 <Box mt={8}>
                 {address ? (
-                    <TransferButton
+                    <TransferButton 
                         tokenAddress={selectedToken}
                         receiver={formData.reciver}
                         amount={formData.amount.toString()}

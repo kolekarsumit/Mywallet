@@ -8,39 +8,40 @@ const address = useAddress();
 
 
     return (
-        <Container maxW={"1440px"} py={4}>
-            <Flex flexDirection={"row"} justifyContent={"space-between"} alignItems={"center"}>
+        <Container maxW={"1440px"} py={4} bg={"#333"} color={"white"} boxShadow={"0 0 10px rgba(0, 0, 0, 0.2)"}>
+    <Flex flexDirection={"row"} justifyContent={"space-between"} alignItems={"center"}>
 
-                <Link href={"/"}>
-                    <Text fontWeight={"bold"}> Transfer Token</Text>
+        <Link href={"/"}>
+            <Text fontWeight={"bold"} fontSize={20}>My Wallet</Text>
+        </Link>
+
+        {address && (
+            <Flex flexDirection={"row"}>
+
+                <Link href={"/transfer"}>
+                    <Text mr={10} fontSize={16}>Transfer</Text>
+                </Link>
+
+                <Link href={"/userdata"}>
+                    <Text mr={10} fontSize={16}>Get Loan</Text>
                 </Link>
 
 
-                {address && (
-                    <Flex flexDirection={"row"}>
+                <Link href={`/profile/${address}`}>
+                    <Text mr={10} fontSize={16}>Profile</Text>
+                </Link>
 
-                        <Link href={"/transfer"}>
-                        <Text mr={8}>Transfer</Text>
-                         </Link>
-
-                         <Link href={"/claim"}>
-                        <Text mr={8}>Claim</Text>
-                        </Link>
-
-                        <Link href={`/profile/${address}`}>
-                            <Text mr={8}>My Account</Text>
-                        </Link>
-
-                        <Link href={"/UserData"}>
-                            <Text mr={8}>Users</Text>
-                        </Link>
-                    </Flex>
-                    
-                )}
-
-                <ConnectWallet />
+                <Link href={"/RequestMoney"}>
+                    <Text mr={10} fontSize={16}>Request</Text>
+                </Link>
 
             </Flex>
-        </Container>
+        )}
+
+        <ConnectWallet/>
+
+    </Flex>
+</Container>
+
     )
 }

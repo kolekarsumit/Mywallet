@@ -18,7 +18,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <ChakraProvider>
         <Navbar />
          <Component {...pageProps} />
-         <Footer />
+     
       
       </ChakraProvider>
     </ThirdwebProvider>

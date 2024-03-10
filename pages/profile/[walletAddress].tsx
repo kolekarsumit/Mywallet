@@ -2,13 +2,10 @@ import { Avatar, Container, Flex, Heading, SimpleGrid, Spinner, Text } from "@ch
 import { useAddress, useContract, useContractRead } from "@thirdweb-dev/react";
 import { TRANSFER_CONTRACT_ADDRESS } from "../../const/addresses";
 import BalanceCard from "../../components/BalanceCard";
+import { truncateAddress } from "../../const/truncateAddress";
 
 export default function AccountPage() {
     const address = useAddress()?.toString();
-
-    function truncateAddress(address: string) {
-        return `${address.substring(0, 6)}...${address.substring(address.length - 4)}`;
-    };
 
     const {
         contract: transferContract,
@@ -59,5 +56,6 @@ export default function AccountPage() {
             )}
 
         </Container>
+        
     )
 }
