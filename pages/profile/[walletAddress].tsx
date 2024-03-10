@@ -33,7 +33,7 @@ export default function AccountPage() {
                         >{truncateAddress(address)}</Text>
                     </Flex>
                     <Flex flexDirection={"column"} w={"100%"}>
-                        <Heading>Token Balances</Heading>
+                        <Heading>Accout Balances</Heading>
                         <SimpleGrid columns={3} spacing={4} mt={4}>
                             {!isVerifiedTokensLoading ? (
                                 verifiedTokens.map((token: string) => (

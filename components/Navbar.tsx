@@ -19,20 +19,20 @@ const address = useAddress();
             <Flex flexDirection={"row"}>
 
                 <Link href={"/transfer"}>
-                    <Text mr={10} fontSize={16}>Transfer</Text>
+                    <Text mr={10} fontSize={20}>Transfer</Text>
                 </Link>
 
                 <Link href={"/userdata"}>
-                    <Text mr={10} fontSize={16}>Get Loan</Text>
+                    <Text mr={10} fontSize={20}>Get Loan</Text>
                 </Link>
 
 
                 <Link href={`/profile/${address}`}>
-                    <Text mr={10} fontSize={16}>Profile</Text>
+                    <Text mr={10} fontSize={20}>Profile</Text>
                 </Link>
 
-                <Link href={"/RequestMoney"}>
-                    <Text mr={10} fontSize={16}>Request</Text>
+                <Link href={"/"}>
+                    <Text mr={10} fontSize={20}>Request</Text>
                 </Link>
 
             </Flex>

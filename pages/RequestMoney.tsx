@@ -47,72 +47,81 @@ export default function RequestMoney() {
     };
 
     return (
-        <Card w={"50%"} p={20}>
-            <Heading textAlign={"center"} mb={10}>Request Money</Heading>
+        <Flex
+            style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '100vh', // This ensures the card is centered vertically
+            }}
+        >
 
-            <Text fontWeight={"bold"} mt={4} mb={5}>Select Currency:</Text>
+            <Card w={"50%"} p={20}>
+                <Heading textAlign={"center"} mb={10}>Request Money</Heading>
 
-            <Flex
-                style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    marginTop: "5px",
-                    maxWidth: "25%",
-                    padding: "10px"
+                <Text fontWeight={"bold"} mt={4} mb={5}>Select Currency:</Text>
 
-                }}
-            >
-                {!isVerifiedTokensLoading &&
-                    verifiedTokens.map((tokenAddress: string) => (
-                        <Box key={tokenAddress} onClick={() => handleTokenSelection(tokenAddress)}>
-                            <TokenSelection
-                                tokenAddress={tokenAddress}
-                                isSelected={selectedToken === tokenAddress}
-                            />
-                        </Box>
-                    ))}
-            </Flex>
-            {/* <TokenBlance tokenAddress={selectedToken} /> */}
+                <Flex
+                    style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        marginTop: "5px",
+                        maxWidth: "25%",
+                        padding: "10px"
+                    }}
+                >
+                    {!isVerifiedTokensLoading &&
+                        verifiedTokens.map((tokenAddress: string) => (
+                            <Box key={tokenAddress} onClick={() => handleTokenSelection(tokenAddress)}>
+                                <TokenSelection
+                                    tokenAddress={tokenAddress}
+                                    isSelected={selectedToken === tokenAddress}
+                                />
+                            </Box>
+                        ))}
+                </Flex>
 
-          <Text mt={4} mb={2}> Requesting to {add}</Text>
+                <Text mt={4} mb={2}> Requesting to {add}</Text>
 
-            <Text mt={4} mb={2} fontWeight={"bold"}>Request To:</Text>
-            <Input
-                placeholder="0x0000000"
-                type="text"
-                value={formData.reciver}
-                onChange={(event) => handleChange(event, "reciver")}
-            />
+                <Text mt={4} mb={2} fontWeight={"bold"}>Request To:</Text>
+                <Input
+                    placeholder="0x0000000"
+                    type="text"
+                    value={formData.reciver}
+                    onChange={(event) => handleChange(event, "reciver")}
+                />
+{/* 
+                <Text style={{ visibility: "hidden" }} mt={4} mb={2} fontWeight={"bold"}>Amount:</Text>
+                <Input
+                    style={{ visibility: "hidden" }}
+                    placeholder="0.0"
+                    type="number"
+                    value={formData.amount}
+                    onChange={(event) => handleChange(event, "amount")}
+                /> */}
 
+                <Text mt={4} mb={2} fontWeight={"bold"}> Money:</Text>
+                <Input
+                    placeholder="Add a note here."
+                    type="text"
+                    value={formData.message}
+                    onChange={(event) => handleChange(event, "message")}
+                />
 
-            <Text mt={4} mb={2} fontWeight={"bold"}>Amount:</Text>
-            <Input
-                placeholder="0.0"
-                type="number"
-                value={formData.amount}
-                onChange={(event) => handleChange(event, "amount")}
-            />
-            <Text mt={4} mb={2} fontWeight={"bold"}>Note:</Text>
-            <Input
-                placeholder="Add a note here."
-                type="text"
-                value={formData.message}
-                onChange={(event) => handleChange(event, "message")}
-            />
+                <Box mt={8}>
+                    {address ? (
+                        <TransferButton
+                            tokenAddress={selectedToken}
+                            receiver={formData.reciver}
+                            amount="0"
+                            message={formData.message}
+                        />
+                    ) : (
+                        <Text>Please connect your wallet to make a Request.</Text>
+                    )}
+                </Box>
+            </Card>
+        </Flex>
 
-            <Box mt={8}>
-                {address ? (
-                    <TransferButton
-                        tokenAddress={selectedToken}
-                        receiver={formData.reciver}
-                        amount="0"
-                        message={formData.message}
-                    />
-                ) : (
-                    <Text>Please connect your wallet to make a Request.</Text>
-                )}
-            </Box>
-
-        </Card>
     )
 }
