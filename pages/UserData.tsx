@@ -50,7 +50,7 @@ export default function UserInformation() {
                         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
                         backgroundColor: '#fff',
                         cursor: 'pointer',
-                        height: '500px',
+                        height: '300px',
                         width: '550px',
                     };
 
@@ -75,7 +75,7 @@ export default function UserInformation() {
                             <Stack spacing={8}>
                                 <Flex flexDirection={"row"} alignItems={"center"}>
                                     <Text fontSize={"lg"} mr={4}>{record.address}</Text>
-                                    <Text fontSize={"lg"} ml={12}>{record.balance}</Text>
+                                    {/* <Text fontSize={"lg"} ml={12}>{record.balance}</Text> */}
                                 </Flex>
                                 <Flex
                                     style={{
@@ -83,7 +83,7 @@ export default function UserInformation() {
                                         flexDirection: "row",
                                         marginTop: "5px",
                                         maxWidth: "25%",
-                                        padding: "10px"
+                                        padding: "5px"
 
                                     }}
                                 >

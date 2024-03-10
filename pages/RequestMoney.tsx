@@ -90,7 +90,7 @@ export default function RequestMoney() {
                     value={formData.reciver}
                     onChange={(event) => handleChange(event, "reciver")}
                 />
-{/* 
+                {/* 
                 <Text style={{ visibility: "hidden" }} mt={4} mb={2} fontWeight={"bold"}>Amount:</Text>
                 <Input
                     style={{ visibility: "hidden" }}
