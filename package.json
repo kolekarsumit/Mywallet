@@ -20,7 +20,8 @@
     "framer-motion": "^11.0.8",
     "next": "^13",
     "react": "^18.2",
-    "react-dom": "^18.2"
+    "react-dom": "^18.2",
+    "react-toastify": "^10.0.4"
   },
   "devDependencies": {
     "@types/node": "^18.11.11",
